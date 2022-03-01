@@ -1,0 +1,37 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+body {
+  background-color: violet;
+}
+/* to center the search box */
+.searchContainer {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+/* rounded search box */
+.searchBoxButtonWrepper {
+  display: flex;
+  border-radius: 100px;
+  overflow: hidden;
+}
+/* input box */
+.searchBox {
+  border: none;
+  font-size: 1.5rem;
+  padding: 10px;
+}
+.searchBox:focus {
+  outline: none;
+}
+/* search button */
+.searchButton {
+  border: none;
+  padding: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background-color: greenyellow;
+}
