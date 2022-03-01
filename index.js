@@ -1,35 +1,48 @@
 const searchBox = document.getElementById("searchBox");
 const searchButton = document.getElementById("searchButton");
+const loader = document.getElementById("loader");
+const cardContainer = document.getElementById("cardContainer");
+loader.style.display = "none";
+
 let searchText;
 
 searchBox.addEventListener("keyup", (event) => {
   searchText = event.target.value;
   //   console.log(searchText);
 });
+
+searchBox.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    cardContainer.innerHTML = "";
+    searchMobile();
+  }
+});
 searchButton.addEventListener("click", () => {
-  console.log(searchText);
+  cardContainer.innerHTML = "";
   searchMobile();
 });
 
 // fatch data
 const searchMobile = () => {
-  console.log("loading ..");
-  fetch("https://openapi.programming-hero.com/api/phones?search=iphone")
+  displayLoader("flex");
+
+  let searchUrl = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
+  fetch(searchUrl)
     .then((response) => response.json())
     .then((data) => {
       console.log(data.data);
       displayData(data.data);
-
-      console.log("done ..");
+      displayLoader("none");
     });
 };
 
 // show data
 
 const displayData = (data) => {
-  const cardContainer = document.getElementById("cardContainer");
-
-  if (data.length != 0) {
+  if (data.length == 0) {
+    console.log("not found");
+    cardContainer.innerHTML = "No result found";
+  } else {
     data.forEach((element) => {
       const card = document.createElement("div");
 
@@ -50,4 +63,8 @@ const displayData = (data) => {
       cardContainer.appendChild(card);
     });
   }
+};
+
+const displayLoader = (state) => {
+  loader.style.display = state;
 };

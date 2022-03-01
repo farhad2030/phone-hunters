@@ -12,7 +12,7 @@
     <header>
       <h1 class="heading">Find your phone</h1>
     </header>
-    <div class="searchContainer">
+    <section class="searchContainer">
       <div class="searchBoxButtonWrepper">
         <input
           id="searchBox"
@@ -20,11 +20,26 @@
           class="searchBox"
           placeholder="Search your phone ..."
         />
+
         <button id="searchButton" class="searchButton">Search</button>
       </div>
-    </div>
+    </section>
 
-    <div class="cardContainer" id="cardContainer">
+    <div id="loader" class="center">
+      <div class="spinner"></div>
+    </div>
+    <section class="detailContainer">
+      <div class="detailImage">
+        <img
+          src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-13-pro.jpg"
+          alt=""
+        />
+      </div>
+      <div class="detailText">
+        <p>Name : dfsf</p>
+      </div>
+    </section>
+    <section class="cardContainer" id="cardContainer">
       <!-- <div class="card">
         <img
           src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-13-pro.jpg"
@@ -37,7 +52,7 @@
         </div>
       </div> 
    -->
-    </div>
+    </section>
     <script src="index.js"></script>
   </body>
 </html>

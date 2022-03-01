@@ -4,6 +4,33 @@
   box-sizing: border-box;
 }
 
+/* utiliti */
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+/* spinner  */
+.spinner {
+  margin: 5px;
+  height: 50px;
+  width: 50px;
+  position: relative;
+  border-radius: 100px;
+  border-top: 5px dotted yellowgreen;
+  border-left: 5px dotted yellowgreen;
+  border-right: 5px dotted yellowgreen;
+  border-bottom: 5px dotted transparent;
+  animation: spinner 1s linear infinite;
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .heading {
   text-align: center;
   padding: 10px;
@@ -38,6 +65,7 @@
   cursor: pointer;
   background-color: greenyellow;
 }
+
 .cardContainer {
   padding: 20px;
   display: grid;
