@@ -9,7 +9,12 @@
   display: flex;
   justify-content: center;
 }
-
+.textBold {
+  font-weight: bold;
+}
+.textUnderline {
+  text-decoration: underline;
+}
 /* spinner  */
 .spinner {
   margin: 5px;
@@ -66,6 +71,20 @@
   background-color: greenyellow;
 }
 
+/* detail container */
+.detailContainer {
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
+.detailText {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .cardContainer {
   padding: 20px;
   display: grid;
@@ -98,6 +117,7 @@
   background-color: yellowgreen;
   cursor: pointer;
 }
+
 @media (max-width: 900px) {
   .cardContainer {
     grid-template-columns: repeat(3, 1fr);

@@ -2,8 +2,9 @@ const searchBox = document.getElementById("searchBox");
 const searchButton = document.getElementById("searchButton");
 const loader = document.getElementById("loader");
 const cardContainer = document.getElementById("cardContainer");
+const detailButton = document.getElementById("detailButton");
+const detailsContainer = document.getElementById("detailsContainer");
 loader.style.display = "none";
-
 let searchText;
 
 searchBox.addEventListener("keyup", (event) => {
@@ -13,11 +14,13 @@ searchBox.addEventListener("keyup", (event) => {
 
 searchBox.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
+    detailsContainer.innerHTML = "";
     cardContainer.innerHTML = "";
     searchMobile();
   }
 });
 searchButton.addEventListener("click", () => {
+  detailsContainer.innerHTML = "";
   cardContainer.innerHTML = "";
   searchMobile();
 });
@@ -54,12 +57,14 @@ const displayData = (data) => {
         />
         <div class="cardText">
           <p class="modelName">Model :${element.phone_name}</p>
+        
           <p class="brandName">Brand : ${element.brand}</p>
-          <p class="detailButton"><button>Details --></button></p>
+          <p class="detailButton"><button onclick="getDetails('${element.slug}')">>Details --></button></p>
         </div>
       
       `;
       card.innerHTML = cardBody;
+
       cardContainer.appendChild(card);
     });
   }
@@ -67,4 +72,80 @@ const displayData = (data) => {
 
 const displayLoader = (state) => {
   loader.style.display = state;
+};
+
+// detail ui
+
+const getDetails = (slug) => {
+  let url = `https://openapi.programming-hero.com/api/phone/${slug}`;
+
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      showDetails(data.data);
+      console.log(data.data);
+    });
+};
+
+// show details
+
+const showDetails = (data) => {
+  let detailsHTML = `
+       <div class="detailImage">
+        <img
+          src="${data.image}"
+          alt=""
+        />
+      </div>
+      <div class="detailText">
+        <p>
+      <spam class="textBold">Model : </spam>
+      <span class="textUnderline">${data.name}</span>
+    </p>
+    <p>
+      <spam class="textBold">Brand : </spam>
+      <span class="textUnderline">${data.brand}</span>
+    </p>
+    <p>
+      <spam class="textBold">Release Data : </spam>
+      <span class="textUnderline">${
+        data.releaseDate ? data.releaseDate : "No release data announced"
+      }</span>
+    </p>
+    <p>
+      <spam class="textBold">Storage : </spam>
+      <span class="textUnderline">${data.mainFeatures.storage}</span>
+    </p>
+    <p>
+      <spam class="textBold">Display size : </spam>
+      <span class="textUnderline">${data.mainFeatures.displaySize}</span>
+    </p>
+    <p>
+      <spam class="textBold">ChipSet : </spam>
+      <span class="textUnderline">${data.mainFeatures.chipSet}</span>
+    </p>
+    <p>
+      <spam class="textBold">Memory : </spam>
+      <span class="textUnderline">${data.mainFeatures.memory}</span>
+    </p>
+    <p>
+      <spam class="textBold">Memory : </spam>
+      <span class="textUnderline">${data.mainFeatures.sensors}</span>
+    </p>
+    <p>
+      <spam class="textBold">WLAN : </spam>
+      <span class="textUnderline">${data.others.WLAN}</span>
+    </p>
+    <p>
+      <spam class="textBold">Bluetooth : </spam>
+      <span class="textUnderline">${data.others.Bluetooth}</span>
+    </p>
+
+ 
+        
+      </div>
+
+
+   `;
+  detailsContainer.innerHTML = detailsHTML;
 };
