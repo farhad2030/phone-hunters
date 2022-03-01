@@ -128,8 +128,27 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
-@media (max-width: 450px) {
+@media (max-width: 400px) {
   .cardContainer {
     grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (max-width: 550px) {
+  .detailContainer {
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .detailImage {
+    display: flex;
+    justify-content: center;
+  }
+  .detailText {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
