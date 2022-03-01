@@ -3,8 +3,10 @@
   padding: 0px;
   box-sizing: border-box;
 }
-body {
-  background-color: violet;
+
+.heading {
+  text-align: center;
+  padding: 10px;
 }
 /* to center the search box */
 .searchContainer {
@@ -17,6 +19,7 @@ body {
   display: flex;
   border-radius: 100px;
   overflow: hidden;
+  box-shadow: 6px 6px 14px #ceceee;
 }
 /* input box */
 .searchBox {
@@ -34,4 +37,51 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
   background-color: greenyellow;
+}
+.cardContainer {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+/* card  */
+.card {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px 10px;
+  border-radius: 10px;
+  box-shadow: 6px 6px 14px #ceceee;
+}
+.cardText {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+/* .modelName {
+} */
+.detailButton {
+  margin-top: 15px;
+}
+.detailButton button {
+  border-radius: 10px;
+  padding: 5px 10px;
+  border: none;
+  background-color: yellowgreen;
+  cursor: pointer;
+}
+@media (max-width: 900px) {
+  .cardContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 650px) {
+  .cardContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 450px) {
+  .cardContainer {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
