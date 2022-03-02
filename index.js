@@ -4,7 +4,15 @@ const loader = document.getElementById("loader");
 const cardContainer = document.getElementById("cardContainer");
 const detailButton = document.getElementById("detailButton");
 const detailsContainer = document.getElementById("detailsContainer");
-loader.style.display = "none";
+const showAllBtn = document.getElementById("showAllBtn");
+
+const toggleElement = (element, state) => {
+  element.style.display = state;
+};
+
+toggleElement(showAllBtn, "none");
+toggleElement(loader, "none");
+
 let searchText;
 
 searchBox.addEventListener("keyup", (event) => {
@@ -33,15 +41,15 @@ searchButton.addEventListener("click", () => {
 
 // fatch data
 const searchMobile = () => {
-  displayLoader("flex");
+  toggleElement(loader, "flex");
 
   let searchUrl = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
   fetch(searchUrl)
     .then((response) => response.json())
     .then((data) => {
       console.log(data.data);
-      displayData(data.data.slice(0, 20));
-      displayLoader("none");
+      displayData(data.data);
+      toggleElement(loader, "none");
     });
 };
 
@@ -52,7 +60,15 @@ const displayData = (data) => {
     console.log("not found");
     cardContainer.innerHTML = "No result found";
   } else {
-    data.forEach((element) => {
+    if (data.length > 20) {
+      toggleElement(showAllBtn, "flex");
+
+      showAllBtn.addEventListener("click", () => {
+        showAllProduct(data.slice(20));
+      });
+    } else toggleElement(showAllBtn, "none");
+
+    data.slice(0, 20).forEach((element) => {
       const card = document.createElement("div");
 
       card.classList.add("card");
@@ -76,8 +92,32 @@ const displayData = (data) => {
   }
 };
 
-const displayLoader = (state) => {
-  loader.style.display = state;
+// show all product
+const showAllProduct = (data) => {
+  console.log("all product");
+
+  data.forEach((element) => {
+    const card = document.createElement("div");
+
+    card.classList.add("card");
+    const cardBody = `
+       <img
+          src=${element.image}
+          alt=""
+        />
+        <div class="cardText">
+          <p class="modelName">Model :${element.phone_name}</p>
+        
+          <p class="brandName">Brand : ${element.brand}</p>
+          <p class="detailButton"><button onclick="getDetails('${element.slug}')">>Details --></button></p>
+        </div>
+      
+      `;
+    card.innerHTML = cardBody;
+
+    cardContainer.appendChild(card);
+    toggleElement(showAllBtn, "none");
+  });
 };
 
 // detail ui

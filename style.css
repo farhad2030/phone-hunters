@@ -117,7 +117,18 @@
   background-color: yellowgreen;
   cursor: pointer;
 }
-
+.showAllBtn {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0px;
+}
+.showAllBtn button {
+  background-color: yellowgreen;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  padding: 10px 25px;
+}
 @media (max-width: 900px) {
   .cardContainer {
     grid-template-columns: repeat(3, 1fr);
